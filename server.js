@@ -5,10 +5,12 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // Sử dụng PORT từ môi trường
 
 app.use(bodyParser.json());
-app.use(cors()); // Sử dụng cors middleware
+app.use(cors({
+  origin: 'https://filumtestintern.vercel.app' // Chỉ cho phép truy cập từ URL frontend
+}));
 
 app.post('/save-result', (req, res) => {
   console.log('Received request:', req.body); // Log request body
